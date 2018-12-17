@@ -4,22 +4,27 @@ import { get, del } from '../utils/request';
 import PropTypes from 'prop-types';
 
 function translate(obj) {
-    if (typeof (obj) === 'object') {
-      return obj.value
-    } else {
-      return obj
-    }
+  if (typeof (obj) === 'object') {
+    return obj.value
+  } else {
+    return obj
   }
+}
 
 class BookList extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       bookList: []
     };
   }
 
-  componentWillMount () {
+  /**
+ * 生命周期
+ * componentWillMount
+ * 组件初始化时只调用，以后组件更新不调用，整个生命周期只调用一次
+ */
+  componentWillMount() {
     get('http://localhost:3000/book')
       .then(res => {
         this.setState({
@@ -28,12 +33,12 @@ class BookList extends React.Component {
       });
   }
 
-  handleEdit (book) {
+  handleEdit(book) {
     //this.context.router.push('/book/edit/' + book.id);
-    window.location.hash = '/book/edit/'+book.id;
+    window.location.hash = '/book/edit/' + book.id;
   }
 
-  handleDel (book) {
+  handleDel(book) {
     del('http://localhost:3000/book/' + book.id)
       .then(res => {
         this.setState({
@@ -47,9 +52,10 @@ class BookList extends React.Component {
       });
   }
 
-  render () {
-    const {bookList} = this.state;
+  render() {
+    const { bookList } = this.state;
 
+    // antd的Table组件使用一个columns数组来配置表格的列
     const columns = [
       {
         title: '图书ID',
@@ -62,7 +68,7 @@ class BookList extends React.Component {
       {
         title: '价格',
         dataIndex: 'price',
-        render: (text, record) => <span>&yen;{record.price / 100}</span>
+        render: (text, record) => <span>&yen;{record.price}</span>
       },
       {
         title: '所有者ID',
@@ -73,7 +79,11 @@ class BookList extends React.Component {
         render: (text, record) => (
           <Button.Group type="ghost">
             <Button size="small" onClick={() => this.handleEdit(record)}>编辑</Button>
-            <Popconfirm title="确定要删除吗？" onConfirm={() => this.handleDel(record)}>
+            <Popconfirm 
+            title="确定要删除吗？" 
+            okText="确定"
+            cancelText="取消"
+            onConfirm={() => this.handleDel(record)}>
               <Button size="small">删除</Button>
             </Popconfirm>
           </Button.Group>
@@ -82,7 +92,7 @@ class BookList extends React.Component {
     ];
 
     return (
-      <Table columns={columns} dataSource={bookList} rowKey={row => row.id}/>
+      <Table columns={columns} dataSource={bookList} rowKey={row => row.id} />
     );
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 // import ReactDOM from 'react-dom';
 import {Link} from  'react-router';
 // const LinkItem = Link.Component;
-import HomeLayout from '../layouts/HomeLayout'
+import '../styles/home-page.less';
 
 // import { Menu, Icon } from 'antd';
 // const SubMenu = Menu.SubMenu;
@@ -43,6 +43,13 @@ import HomeLayout from '../layouts/HomeLayout'
 // }
 
 class Home extends React.Component {
+    // 构造器
+    constructor(props) {
+      super(props);
+      // 定义初始化状态
+      this.state = {};
+    }
+    
   render () {
     return (
       <div className='welcome'>

@@ -15,8 +15,7 @@ class BookEdit extends React.Component {
   }
 
   componentWillMount () {
-    const { match} = this.context.router.route;
-    const bookId = match.params.id;
+    const bookId = this.context.router.params.id;
     // fetch('http://localhost:3000/book/' + bookId)
     //   .then(res => res.json())
     //   .then(res => {
@@ -35,13 +34,14 @@ class BookEdit extends React.Component {
 
   render () {
     const {book} = this.state;
-    return (
-      <HomeLayout title="编辑图书">
-        {
-          book ? <BookEditor editTarget={book} /> : '加载中...'
-        }
-      </HomeLayout>
-    );
+    // return (
+    //   <HomeLayout title="编辑图书">
+    //     {
+    //       book ? <BookEditor editTarget={book} /> : '加载中...'
+    //     }
+    //   </HomeLayout>
+    // );
+    return book ? <BookEditor editTarget={book}/> : <span>加载中...</span>;
   }
 }
 

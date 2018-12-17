@@ -80,7 +80,7 @@ function formProvider(fields) {
         const { form, formValid } = this.state;
         return <Comp
           {...this.props}
-          form={form}
+          data={form}
           formValid={formValid}
           onFormChange={this.handleValueChange}
           setFormValues={(e) => this.setFormValues(e)}

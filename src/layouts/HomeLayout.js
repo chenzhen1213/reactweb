@@ -1,8 +1,13 @@
+/**
+ * 布局组件
+ */
+
 import React from 'react';
 import { Link } from 'react-router';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon } from 'antd';  // Menu 导航菜单 Icon 图标
 import '../styles/home-layout.less';
 
+// 左侧菜单栏
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 

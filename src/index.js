@@ -2,15 +2,17 @@
 import React from 'react';//import 是react的es6使用，就像我们在页面中用<script  src="react.js"> 更多的使用import来引入js以及css文件
 import ReactDOM from 'react-dom'; //ReactDOM是react的方法类
 import { Router, Route, hashHistory } from 'react-router';
-import HomePage from './pages/Home';
-import UserAddPage from './pages/UserAdd';
-import UserListPage from './pages/UserList';
-import UserEditPage from './pages/UserEdit';
-import BookAddPage from './pages/BookAdd';
-import BookListPage from './pages/BookList';
-import BookEditPage from './pages/BookEdit';
-import LoginPage from './pages/Login';
-import HomeLayout from './layouts/HomeLayout'
+
+import HomeLayout from './layouts/HomeLayout';
+import HomePage from './pages/Home'; // 首页
+import LoginPage from './pages/Login'; // 登录页
+import UserAddPage from './pages/UserAdd'; // 添加用户页
+import UserListPage from './pages/UserList'; // 用户列表页
+import UserEditPage from './pages/UserEdit'; // 用户编辑页面
+import BookAddPage from './pages/BookAdd'; // 添加图书页
+import BookListPage from './pages/BookList'; // 图书列表页
+import BookEditPage from './pages/BookEdit'; // 用户编辑页面
+
 import 'antd/dist/antd.css'
 // import {Router} from 'react-dom';
 // import {hashHistory} from 'react-router-dom';
@@ -35,6 +37,8 @@ ReactDOM.render((
   //     <Route path='/login' component={LoginPage} />
   //   </div>
   // </HashRouter >
+
+  //现在的HomeLayout里有一个菜单了，菜单有展开状态需要维护，如果还是像以前那样在每个page组件里单独使用HomeLayout，会导致菜单的展开状态被重置（跳转页面之后都会渲染一个新的HomeLayout），所以需要将HomeLayout放到父级路由中来使用：
   <Router history={hashHistory}>
   <Route component={HomeLayout}>
     <Route path="/" component={HomePage}/>
@@ -48,3 +52,4 @@ ReactDOM.render((
   <Route path="/login" component={LoginPage}/>
 </Router>
 ), document.getElementById('app'));//渲染到id是app的div中
+
