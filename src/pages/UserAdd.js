@@ -131,6 +131,7 @@ class UserAdd extends React.Component {
 
 
   render() {
+    console.log(1)
     //const { form: { name, age, gender }, onFormChange } = this.props;
     //console.log(this.props)
     return (

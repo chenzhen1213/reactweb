@@ -4,67 +4,69 @@
 
 import React from 'react';
 import HomeLayout from '../layouts/HomeLayout';
-import FormItem from '../components/FormItem';
+//import FormItem from '../components/FormItem';
 import { post } from '../utils/request'; // 引入 封装后的fetch工具类
 import formProvider from '../utils/formProvider';
 import PropTypes from 'prop-types';
-import { Icon, Form, Input, Button, message } from 'antd'; // 引入antd组件
+import { Icon, Form, Input, Button, message, Checkbox } from 'antd'; // 引入antd组件
 import style from '../styles/login-page.less';
 
+const FormItem = Form.Item;
+
 class Login extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit (e) {
-     // 通知 Web 浏览器不要执行与事件关联的默认动作
+  handleSubmit(e) {
+    // 通知 Web 浏览器不要执行与事件关联的默认动作
     e.preventDefault();
 
-  //   const {formValid, form: {account, password}} = this.props;
-  //   if (!formValid) {
-  //     alert('请输入账号或密码');
-  //     return;
-  //   }
+    //   const {formValid, form: {account, password}} = this.props;
+    //   if (!formValid) {
+    //     alert('请输入账号或密码');
+    //     return;
+    //   }
 
-  //   post('http://localhost:3000/login', {
-  //     account: account.value,
-  //     password: password.value
-  //   })
-  //     .then((res) => {
-  //       if (res) {
-  //         window.location.hash = '/'
-  //       } else {
-  //         alert('登录失败，账号或密码错误');
-  //       }
-  //     })
-  // }
+    //   post('http://localhost:3000/login', {
+    //     account: account.value,
+    //     password: password.value
+    //   })
+    //     .then((res) => {
+    //       if (res) {
+    //         window.location.hash = '/'
+    //       } else {
+    //         alert('登录失败，账号或密码错误');
+    //       }
+    //     })
+    // }
 
-   // 表单验证
-  this.props.form.validateFields((err, values) => {
-    if (!err) {
-      // 发起请求
-      post('http://localhost:3000/login', values)
-      // 成功的回调
-        .then((res) => {
-          if (res) {
-            message.info('登录成功');
-             // 页面跳转
-            this.context.router.push('/');
-          } else {
-            message.info('登录失败，账号或密码错误');
-          }
-        });
-    }
-  });
-}
+    // 表单验证
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        // 发起请求
+        post('http://localhost:3000/login', values)
+          // 成功的回调
+          .then((res) => {
+            if (res) {
+              message.info('登录成功');
+              // 页面跳转
+              this.context.router.push('/');
+            } else {
+              message.info('登录失败，账号或密码错误');
+            }
+          });
+      }
+    });
+  }
 
 
-  render () {
+  render() {
     //const {form: {account, password}, onFormChange} = this.props;
-    const {form} = this.props;
+    const { form } = this.props;
     // 验证规则
-    const {getFieldDecorator} = form;
+    const { getFieldDecorator } = form;
     // return (
     //   <HomeLayout title="请登录">
     //     <form onSubmit={this.handleSubmit}>
@@ -79,12 +81,12 @@ class Login extends React.Component {
     //     </form>
     //   </HomeLayout>
     // );
-          
-    
+
+
     //这里使用了props.form.getFieldDecorator方法来包装一个Input输入框组件，传入的第一个参数表示这个字段的名称，第二个参数是一个配置对象，这里设置了表单控件的校验规则rules（更多配置项请查看文档）。使用getFieldDecorator方法包装后的组件会自动表单组件的value以及onChange事件；此外，这里还用到了Form.Item这个表单项目组件（上面的FormItem），这个组件可用于配置表单项目的标签、布局等。
     return (
       <div className={style.wrapper}>
-        <div className= {style.body}>
+        <div className={style.body}>
           <header className={style.header}>
             ReactManager
           </header>
@@ -103,7 +105,7 @@ class Login extends React.Component {
                     }
                   ]
                 })(
-                  <Input type="text" addonBefore={<Icon type="user"/>}/>
+                  <Input type="text" addonBefore={<Icon type="user" />} />
                 )}
               </FormItem>
 
@@ -117,20 +119,31 @@ class Login extends React.Component {
                     }
                   ]
                 })(
-                  <Input type="password" addonBefore={<Icon type="lock"/>}/>
+                  <Input type="password" addonBefore={<Icon type="lock" />} />
                 )}
               </FormItem>
 
-              <Button className={style.btn} type="primary" htmlType="submit">Sign In</Button>
+              <FormItem>
+                {getFieldDecorator('remember', {
+                  valuePropName: 'checked',
+                  initialValue: true,
+                })(
+                  <Checkbox>Remember me</Checkbox>
+                )}
+                <a className="login-form-forgot" href="">Forgot password</a>
+                {/* <Button type="primary" htmlType="submit" className="login-form-button">
+                  Log in
+                </Button> */}
+                <Button className={style.btn} type="primary" htmlType="submit">Sign In</Button>
+                Or
+                 <a href=" "> register now!</a>
+              </FormItem>
+
             </Form>
-
           </section>
-
         </div>
-
       </div>
     );
-
   }
 }
 
