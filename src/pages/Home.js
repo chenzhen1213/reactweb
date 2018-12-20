@@ -2,7 +2,7 @@ import React from 'react';
 // import ReactDOM from 'react-dom';
 import {Link} from  'react-router';
 // const LinkItem = Link.Component;
-import '../styles/home-page.less';
+import style from '../styles/home-page.less';
 
 // import { Menu, Icon } from 'antd';
 // const SubMenu = Menu.SubMenu;
@@ -52,7 +52,7 @@ class Home extends React.Component {
     
   render () {
     return (
-      <div className='welcome'>
+      <div className={style.Welcome}>
         Welcome
       </div>
     );

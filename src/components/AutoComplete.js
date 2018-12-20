@@ -4,7 +4,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/auto-complete.less';
+import style from '../styles/auto-complete.less';
 import {Input } from 'antd';
 
 // 获得当前元素value值
@@ -134,7 +134,7 @@ class AutoComplete extends React.Component {
         // 组件传值
         const { value, options } = this.props;
         return (
-            <div className='wrapper'>
+            <div className={style.wrapper}>
                 <Input
                     value={displayValue || value}
                     onChange={e => this.handleChange(e.target.value)}
@@ -143,7 +143,7 @@ class AutoComplete extends React.Component {
                     // onBlur={() => this.setState({ show: false })}  脑子有病
                 />
                 {show && options.length > 0 && (
-                    <ul className='options' onMouseLeave={this.handleLeave}>
+                    <ul className={style.options} onMouseLeave={this.handleLeave}>
                         {
                             options.map((item, index) => {
                                 return (

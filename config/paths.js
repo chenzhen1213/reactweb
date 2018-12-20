@@ -7,8 +7,13 @@ const url = require('url');
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-
+const resolveApp = relativePath =>{
+  if (typeof(relativePath) === 'string') {
+     return path.resolve(appDirectory, relativePath);
+  } else if (Array.isArray(relativePath)) {
+    return relativePath.map(val => path.resolve(val));
+  }
+} 
 const envPublicUrl = process.env.PUBLIC_URL;
 
 function ensureSlash(inputPath, needsSlash) {
@@ -74,7 +79,7 @@ module.exports = {
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src'),
+  appSrc: resolveApp(['src', 'shopping_webapp']),
   appTsConfig: resolveApp('tsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),

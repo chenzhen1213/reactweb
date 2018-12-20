@@ -7,7 +7,7 @@ import React from 'react';
 import formProvider from '../utils/formProvider';
 import PropTypes from 'prop-types';
 import request, { get } from '../utils/request'; // 引入 封装fetch工具类
-import { Form, Input, InputNumber, Select, Button, message } from 'antd';
+import { Form, Input, InputNumber, Select, Button, message,  BackTop } from 'antd';
 
 const FormItem = Form.Item;
 
